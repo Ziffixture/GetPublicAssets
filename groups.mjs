@@ -8,7 +8,7 @@ Groups.get = async function(userId) {
     const groups = await filterJSON({
         url: `https://groups.roblox.com/v1/users/${userId}/groups/roles?includeLocked=false&includeNotificationPreferences=false`,
         exhaust: false,
-        filter: function (row) {
+        filter: function(row) {
             const group = row.group
             if (group.owner.userId != userId) {
                 return
