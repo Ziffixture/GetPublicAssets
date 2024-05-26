@@ -35,5 +35,5 @@ async function getPublicAssets(userId) {
 }
 
 
-const result = await getPublicAssets(1761758398)
+const result = await getPublicAssets(/*User Id*/)
 console.log(result)
