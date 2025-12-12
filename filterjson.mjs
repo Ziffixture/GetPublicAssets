@@ -25,8 +25,8 @@ export function getIndentificationInfo(item) {
 export default async function filterJSON(parameters) {
     let results = []
 
-    const exhaust      = parameters.exhaust
-    const exhaustField = parameters.exhaustFields ?? DEFAULT_EXHAUST_FIELDS
+    const exhaust       = parameters.exhaust
+    const exhaustFields = parameters.exhaustFields ?? DEFAULT_EXHAUST_FIELDS
         
     const url    = parameters.url
     const filter = parameters.filter
@@ -35,13 +35,13 @@ export default async function filterJSON(parameters) {
 
     try {
         do {
-            const response = await fetch(`${url}&${exhaustField.parameter}=${cursor}`)
+            const response = await fetch(`${url}&${exhaustFields.parameter}=${cursor}`)
             if (!response.ok) {
                 return
             }
 
             const body = await response.json()
-            const data = exhaustField.extract(body)
+            const data = exhaustFields.extract(body)
 
             for (const row of data) {
                 const result = filter(row)
@@ -50,7 +50,7 @@ export default async function filterJSON(parameters) {
                 }
             }
 
-            cursor = exhaust && body[exhaustField.property]
+            cursor = exhaust && body[exhaustFields.property]
         } while (cursor)
     } 
     catch (error) {
