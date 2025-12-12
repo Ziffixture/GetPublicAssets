@@ -25,11 +25,10 @@ export function getIndentificationInfo(item) {
 export default async function filterJSON(parameters) {
     let results = []
 
+    const url           = parameters.url
+    const filter        = parameters.filter
     const exhaust       = parameters.exhaust
     const exhaustFields = parameters.exhaustFields ?? DEFAULT_EXHAUST_FIELDS
-        
-    const url    = parameters.url
-    const filter = parameters.filter
 
     let cursor = ""
 
