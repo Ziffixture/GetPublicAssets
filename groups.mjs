@@ -1,35 +1,39 @@
 import filterJSON, { getMarketInfo, getIndentificationInfo } from "./filterjson.mjs"
 
 
+
 const Groups = {}
 
 
+
+function getIdentificationInfoOfOwned(row, userId) {
+    const group = row.group
+    if (row.group.owner.userId == userId) {
+        return getIndentificationInfo(group)
+    }
+}
+
+
 Groups.get = async function(userId) {
-    const groups = await filterJSON({
-        url: `https://groups.roblox.com/v1/users/${userId}/groups/roles?includeLocked=false&includeNotificationPreferences=false`,
-        exhaust: false,
-        filter: function(row) {
-            const group = row.group
-            if (group.owner.userId != userId) {
-                return
-            }
+    const parameters = {}
 
-            return getIndentificationInfo(group)
-        }
-    })
+    parameters.url     = `https://groups.roblox.com/v1/users/${userId}/groups/roles?includeLocked=false&includeNotificationPreferences=false`
+    parameters.filter  = (row) => getIdentificationInfoOfOwned(row, userId)
+    parameters.exhaust = true
 
-    return groups
+    return await filterJSON(parameters)
 }
 
 Groups.getStoreAssets = async function(groupId) {
-    const storeAssets = await filterJSON({
-        url: `https://catalog.roblox.com/v1/search/items/details?CreatorTargetId=${groupId}&CreatorType=2&Limit=30`,
-        exhaust: true,
-        filter: getMarketInfo,
-    })
+    const parameters = {}
 
-    return storeAssets
+    parameters.url     = `https://catalog.roblox.com/v1/search/items/details?CreatorTargetId=${groupId}&CreatorType=2&Limit=30`
+    parameters.filter  = getMarketInfo
+    parameters.exhaust = true
+
+    return await filterJSON(parameters)
 }
+
 
 
 export default Groups
