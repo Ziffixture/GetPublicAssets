@@ -1,11 +1,8 @@
 {
   "name": "getpublicassets",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Compiles a list of public assets owned by a Roblox user.",
-  "main": "index.js",
-  "scripts": {
-    "app-start": "node main.mjs"
-  },
+  "main": "main.mjs",
   "author": "Ziffixture",
   "license": "ISC"
 }
