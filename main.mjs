@@ -41,7 +41,8 @@ async function getPublicAssets(userId) {
 
 const start = performance.now()
 
-const result = await getPublicAssets(1354492641)
+const result = await getPublicAssets(/*USER ID*/)
 console.log(result)
 
 console.log(`\nRuntime: ${(performance.now() - start) / 1000} seconds.`)
+
