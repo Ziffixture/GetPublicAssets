@@ -4,5 +4,5 @@
   "description": "Compiles a list of public assets owned by a Roblox user.",
   "main": "main.mjs",
   "author": "Ziffixture",
-  "license": "ISC"
+  "license": "MIT"
 }
